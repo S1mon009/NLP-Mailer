@@ -2,12 +2,13 @@ from textual.app import App, ComposeResult
 from textual.widgets import Button, Label, Static
 from textual.containers import Container, VerticalScroll
 from textual.widgets import Footer, Label, ListItem, ListView
+from pathlib import Path
 
 
 
 class WelcomeWidget(Container):
     """Welcome widget displaying application description"""
-    CSS_PATH = "welcome.tcss"
+    CSS_PATH = str(Path(__file__).parent / "welcome.tcss")
 
     def compose(self) -> ComposeResult:
         with VerticalScroll():
