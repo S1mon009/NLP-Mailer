@@ -1,0 +1,29 @@
+Screen {
+    align: center top;
+}
+
+.select {
+    width: 60;
+    margin: 2;
+    border: solid rgb(185, 148, 244);
+}
+
+Select:focus {
+    border: solid rgb(185, 148, 244);
+    color: rgb(185, 148, 244);
+}
+
+Select > .option-list {
+    border: solid rgb(185, 148, 244);
+}
+
+Option:hover {
+    background: rgb(185, 148, 244) 30%;
+    color: rgb(185, 148, 244);
+}
+
+Option:focus {
+    background: rgb(185, 148, 244);
+    color: rgb(0, 0, 0);
+    border: solid rgb(185, 148, 244);
+}
