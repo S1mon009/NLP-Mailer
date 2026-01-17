@@ -29,8 +29,8 @@ class GmailConnector:
                 creds.refresh(Request())
             else:
                 if not os.path.exists(self.credentials_file):
-                    print("\\n❌ Gmail credentials not found!")
-                    print("\\n📝 Setup instructions:")
+                    print("Gmail credentials not found!")
+                    print("Setup instructions:")
                     print("1. Go to: https://console.cloud.google.com")
                     print("2. Create a project and enable Gmail API")
                     print("3. Create OAuth 2.0 credentials")
@@ -46,7 +46,7 @@ class GmailConnector:
                 token.write(creds.to_json())
         
         self.service = build('gmail', 'v1', credentials=creds)
-        print("✓ Gmail authentication successful")
+        print("Gmail authentication successful")
         return True
     
     def get_emails(self, max_results: int = 50, query: str = '') -> List[Dict[str, Any]]:
@@ -67,7 +67,7 @@ class GmailConnector:
             
             return emails
         except HttpError as error:
-            print(f"❌ Error fetching emails: {error}")
+            print(f"Error fetching emails: {error}")
             return []
     
     def _parse_email(self, email_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -135,7 +135,7 @@ class GmailConnector:
                 userId='me', body=label).execute()
             return created_label['id']
         except HttpError as error:
-            print(f"⚠️  Label error: {error}")
+            print(f"Label error: {error}")
             return None
     
     def _get_label_color(self, label_name: str) -> Dict[str, str]:
@@ -155,7 +155,7 @@ class GmailConnector:
             ).execute()
             return True
         except HttpError as error:
-            print(f"❌ Error applying label: {error}")
+            print(f"Error applying label: {error}")
             return False
     
     def remove_category_labels(self) -> int:
@@ -170,5 +170,5 @@ class GmailConnector:
                     removed += 1
             return removed
         except Exception as e:
-            print(f"❌ Error removing labels: {e}")
+            print(f"Error removing labels: {e}")
             return 0

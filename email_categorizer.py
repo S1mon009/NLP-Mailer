@@ -60,7 +60,7 @@ class EmailCategorizer:
         if training_emails is None:
             training_emails = TRAINING_DATA
         
-        print(f"\\n🎓 Training model with {len(training_emails)} emails...")
+        print(f"Training model with {len(training_emails)} emails...")
         
         texts = [self.extract_features(email) for email in training_emails]
         labels = [email['category'] for email in training_emails]
@@ -68,11 +68,11 @@ class EmailCategorizer:
         self.pipeline.fit(texts, labels)
         
         label_counts = Counter(labels)
-        print("\\n   Training data distribution:")
+        print("Training data distribution:")
         for category, count in label_counts.most_common():
             print(f"   • {category}: {count} emails")
         
-        print(f"\\n✓ Model trained successfully")
+        print("Model trained successfully")
         self.save_model()
     
     def categorize(self, email):
@@ -96,14 +96,14 @@ class EmailCategorizer:
         '''Save trained model'''
         with open(self.model_path, 'wb') as f:
             pickle.dump(self.pipeline, f)
-        print(f"💾 Model saved to {self.model_path}")
+        print(f"Model saved to {self.model_path}")
     
     def load_model(self):
         '''Load trained model'''
         try:
             with open(self.model_path, 'rb') as f:
                 self.pipeline = pickle.load(f)
-            print(f"✓ Model loaded from {self.model_path}")
+            print(f"Model loaded from {self.model_path}")
         except Exception as e:
-            print(f"⚠️  Could not load model: {e}")
+            print(f"Could not load model: {e}")
             self._initialize_model()

@@ -15,7 +15,7 @@ class GmailSubjectTagger:
     def setup(self):
         '''Setup and train model if needed'''
         if not self.categorizer.model_path.exists():
-            print("\\n⚠️  No trained model found. Training...")
+            print("No trained model found. Training...")
             self.categorizer.train()
         
         return self.gmail.authenticate()
@@ -33,9 +33,9 @@ class GmailSubjectTagger:
         if min_confidence is None:
             min_confidence = MIN_CONFIDENCE
         
-        print(f"\\n📬 Fetching up to {max_emails} emails from Gmail...")
+        print(f"Fetching up to {max_emails} emails from Gmail...")
         if query:
-            print(f"   Query: {query}")
+            print(f"Query: {query}")
         
         emails = self.gmail.get_emails(max_results=max_emails, query=query)
         
@@ -43,9 +43,9 @@ class GmailSubjectTagger:
             print("No emails found")
             return
         
-        print(f"✓ Fetched {len(emails)} emails")
-        print(f"\\n🤖 Categorizing and tagging subjects...")
-        print(f"   Min confidence: {min_confidence:.0%}")
+        print(f"Fetched {len(emails)} emails")
+        print(f"Categorizing and tagging subjects...")
+        print(f"Min confidence: {min_confidence:.0%}")
         
         results = []
         tagged = 0
@@ -95,53 +95,53 @@ class GmailSubjectTagger:
                 tagged += 1
             
             if i % 10 == 0:
-                print(f"   Processed {i}/{len(emails)}...")
+                print(f"Processed {i}/{len(emails)}...")
         
-        print(f"\\n✓ Processing complete!")
+        print("Processing complete!")
         self._show_summary(results, tagged, skipped, low_confidence, dry_run)
         
         return results
     
     def _show_summary(self, results, tagged, skipped, low_confidence, dry_run):
         '''Display tagging summary'''
-        print("\\n" + "="*60)
-        print("📊 TAGGING SUMMARY")
+        print("="*60)
+        print("TAGGING SUMMARY")
         print("="*60)
         
         if dry_run:
-            print("\\n🔍 DRY RUN MODE - No changes applied")
+            print("DRY RUN MODE - No changes applied")
         
-        print(f"\\n📌 Tagged: {tagged}")
-        print(f"⏭️  Already tagged: {skipped}")
-        print(f"⚠️  Low confidence (skipped): {low_confidence}")
-        
+        print(f"Tagged: {tagged}")
+        print(f"Already tagged: {skipped}")
+        print(f"Low confidence (skipped): {low_confidence}")
+
         if results:
-            print(f"\\n📋 Sample tagged emails:")
+            print("Sample tagged emails:")
             category_counts = Counter(r['category'] for r in results)
             
             for category, count in category_counts.most_common():
-                print(f"\\n  {category} ({count}):")
+                print(f"{category} ({count}):")
                 samples = [r for r in results if r['category'] == category][:3]
                 for sample in samples:
                     old = sample['email']['subject'][:40]
                     new = sample['new_subject'][:50]
                     conf = sample['confidence']
-                    print(f"    • {old}...")
-                    print(f"      → {new}... ({conf:.1%})")
+                    print(f"• {old}...")
+                    print(f"→ {new}... ({conf:.1%})")
     
     def test_email(self, subject, body=''):
         '''Test categorization on a single email'''
         email = {'subject': subject, 'body': body}
         category, confidence = self.categorizer.categorize(email)
         
-        print(f"\\n  Original: {subject}")
-        print(f"  Tagged: [{category}] {subject}")
-        print(f"  Confidence: {confidence:.2%}")
+        print(f"Original: {subject}")
+        print(f"Tagged: [{category}] {subject}")
+        print(f"Confidence: {confidence:.2%}")
         
         return category, confidence
     
     def clear_labels(self):
         '''Remove all category labels'''
-        print("\\n🗑️  Clearing category labels...")
+        print("Clearing category labels...")
         removed = self.gmail.remove_category_labels()
-        print(f"✓ Removed {removed} category labels")
+        print(f"Removed {removed} category labels")
