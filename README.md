@@ -1,5 +1,7 @@
 # Gmail Auto-Categorizer with NLP
 
+![Static Badge](https://img.shields.io/badge/python-python?style=for-the-badge&logo=python&logoColor=%23fff&color=%233776AB) ![Static Badge](https://img.shields.io/badge/scikitlearn-scikitlearn?style=for-the-badge&logo=scikitlearn&logoColor=%23fff&color=%23F7931E) ![Static Badge](https://img.shields.io/badge/gmail-gmail?style=for-the-badge&logo=gmail&logoColor=%23fff&color=%23EA4335)
+
 Automatic addition of categories to Gmail message subjects using machine learning and natural language processing (NLP).
 
 ## Description
