@@ -1,7 +1,7 @@
 from collections import Counter
-from gmail_connector import GmailConnector
-from email_categorizer import EmailCategorizer
-from config import MIN_CONFIDENCE
+from src.integrations.gmail_connector import GmailConnector
+from src.services.email_categorizer import EmailCategorizer
+from src.config.config import MIN_CONFIDENCE
 
 
 class GmailSubjectTagger:

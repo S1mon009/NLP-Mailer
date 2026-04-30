@@ -7,7 +7,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 import nltk
 from nltk.corpus import stopwords
-from config import CATEGORIES, MODEL_PATH, TRAINING_DATA
+from src.config.config import CATEGORIES, MODEL_PATH, TRAINING_DATA
 
 # Download NLTK data
 nltk.download('stopwords', quiet=True)
@@ -94,6 +94,7 @@ class EmailCategorizer:
     
     def save_model(self):
         '''Save trained model'''
+        self.model_path.parent.mkdir(parents=True, exist_ok=True)
         with open(self.model_path, 'wb') as f:
             pickle.dump(self.pipeline, f)
         print(f"Model saved to {self.model_path}")

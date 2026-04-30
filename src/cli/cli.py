@@ -1,4 +1,4 @@
-from tagger import GmailSubjectTagger
+from src.services.tagger import GmailSubjectTagger
 
 
 class CLI:

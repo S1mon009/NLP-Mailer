@@ -1,4 +1,4 @@
-from cli import CLI
+from src.cli.cli import CLI
 
 def main():
     '''Main entry point'''

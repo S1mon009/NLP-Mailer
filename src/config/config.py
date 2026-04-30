@@ -4,7 +4,7 @@ GMAIL_TOKEN_FILE = 'token.json'
 GMAIL_SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 # Model Configuration
-MODEL_PATH = 'email_model.pkl'
+MODEL_PATH = 'src/models/email_model.pkl'
 MIN_CONFIDENCE = 0.6
 
 # Categories
