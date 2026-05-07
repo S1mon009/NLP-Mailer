@@ -60,10 +60,12 @@ This project uses NLP algorithms to analyze email subjects and automatically ass
    - Create a new project or select an existing one
    - Enable Gmail API
    - Create credentials (OAuth 2.0 Client ID)
+   - Add the Gmail address you want to use in the application to the test users list
    - Download the `credentials.json` file and place it in the project's root directory
 
 2. **First Run**:
    - On the first run, the application will perform the authentication process
+   - Select the Gmail address you added to the test users list
    - A `token.json` file will be created for future sessions
 
 ## Usage
