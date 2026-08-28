@@ -1,0 +1,49 @@
+{
+  "builder_name": "json",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "multiclass-email-classification",
+  "dataset_size": 991552,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/imnim/multiclass-email-classification@581aab4c2ca77e045b19a110b316e9d666bee3b6/email_dataset.json": {
+      "num_bytes": 1140713,
+      "checksum": null
+    }
+  },
+  "download_size": 1140713,
+  "features": {
+    "subject": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "body": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "labels": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "List"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 2132265,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 991552,
+      "num_examples": 2105,
+      "dataset_name": "multiclass-email-classification"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

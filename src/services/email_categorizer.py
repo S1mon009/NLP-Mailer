@@ -7,7 +7,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 import nltk
 from nltk.corpus import stopwords
-from src.config.config import CATEGORIES, MODEL_PATH, TRAINING_DATA
+from src.config.config import CATEGORIES, MODEL_PATH, get_training_data
 
 # Download NLTK data
 nltk.download('stopwords', quiet=True)
@@ -56,9 +56,9 @@ class EmailCategorizer:
         return self.preprocess_text(combined)
     
     def train(self, training_emails=None):
-        '''Train the categorizer'''
+        '''Train the categorizer using the local Hugging Face dataset only.'''
         if training_emails is None:
-            training_emails = TRAINING_DATA
+            training_emails = get_training_data()
         
         print(f"Training model with {len(training_emails)} emails...")
         
