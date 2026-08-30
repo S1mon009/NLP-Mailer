@@ -81,7 +81,7 @@ class EmailCategorizer:
             ('classifier', MultinomialNB())
         ])
 
-    def preprocess_text(self, text) -> str:
+    def preprocess_text(self, text: Any) -> str:
         """
         Clean and normalize email text.
 
@@ -183,7 +183,7 @@ class EmailCategorizer:
 
         return category, confidence
 
-    def has_category_tag(self, subject) -> bool:
+    def has_category_tag(self, subject: Any) -> bool:
         """
         Check whether an email subject already contains a category tag.
 

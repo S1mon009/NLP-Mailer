@@ -19,7 +19,7 @@ The main configuration areas provided by this module are:
 - Mapping between dataset labels and application categories.
 """
 from pathlib import Path
-from datasets import load_dataset, load_from_disk
+from datasets import load_dataset, load_from_disk, Dataset, DatasetDict
 
 # Gmail API Configuration
 GMAIL_CREDENTIALS_FILE = 'credentials.json'
@@ -65,7 +65,7 @@ DATASET_LOCAL_PATH = Path(__file__).resolve().parents[1] / 'datasets' / 'hf_emai
 LABEL_MAPPING = {label: label for label in DATASET_LABELS}
 
 
-def load_hf_email_dataset():
+def load_hf_email_dataset() -> (Dataset | DatasetDict):
     """
     Load the email classification dataset from Hugging Face.
 
@@ -90,7 +90,7 @@ def load_hf_email_dataset():
     return dataset
 
 
-def get_training_data():
+def get_training_data() -> list[dict]:
     """
     Prepare email data for machine learning model training.
 

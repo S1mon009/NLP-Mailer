@@ -59,8 +59,8 @@ class GmailSubjectTagger:
         return self.gmail.authenticate()
 
     def tag_emails(self,
-                   max_emails=50, query='',
-                   dry_run=False, 
+                   max_emails:int = 50, query:str = '',
+                   dry_run:bool = False,
                    min_confidence: Optional[float] = None)-> Optional[List[Dict[str, Any]]]:
         """
         Fetch, categorize, and tag email subjects.

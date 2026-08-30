@@ -1,41 +1,132 @@
-# Gmail Auto-Categorizer with NLP
+# NLP-Mailer
 
-This project automatically adds category labels to Gmail messages using NLP and machine learning.
+**NLP-Mailer** is a Python-based command-line application that automatically categorizes Gmail messages using natural language processing and machine learning.
 
-It loads a real dataset from Hugging Face, trains a lightweight classifier, and applies category labels to email subjects through the Gmail API.
+The application connects to Gmail through the Gmail API, analyzes email content, predicts the most appropriate category, and applies a corresponding Gmail label.
 
-## Why this project
+NLP-Mailer is designed to provide a lightweight, local and configurable solution for automatic email organization without requiring an external AI service.
 
-The goal is to make large inboxes easier to organize without manual tagging. By analyzing the subject and message content, the app assigns a category such as Business, Personal, Travel, or Promotions.
+---
 
-## Main features
+## Why NLP-Mailer?
 
-- automatic email classification,
-- Gmail API integration,
-- NLP-based text categorization,
-- real dataset support from Hugging Face,
-- confidence threshold control,
-- command-line interface for manual usage,
-- local caching of the training dataset.
+Managing a large inbox manually can become repetitive and time-consuming. Traditional Gmail filters are useful for rule-based organization, but they require users to define explicit rules for every type of message.
 
-## Project overview
+NLP-Mailer takes a different approach.
 
-The application follows a simple flow:
+Instead of relying exclusively on predefined rules, it uses a machine learning model trained on categorized email data. The model analyzes the content of an email and estimates which category best describes the message.
 
-1. download the dataset,
-2. save it locally,
-3. train the model,
-4. authenticate with Gmail,
-5. classify incoming messages,
-6. add category labels.
+The application can therefore recognize patterns in email text without requiring a separate Gmail filter for every situation.
 
-## Repository
+---
 
-- GitHub: https://github.com/your-username/NLP-Mailer
+## Key Features
 
-## Documentation sections
+- **Automatic email categorization** using machine learning.
+- **Gmail API integration** for reading and labeling messages.
+- **OAuth 2.0 authentication** for secure Gmail access.
+- **TF-IDF text vectorization** for converting email text into numerical features.
+- **Multinomial Naive Bayes classification** for category prediction.
+- **Confidence-based filtering** to prevent low-confidence predictions from being applied.
+- **Local model persistence** using a serialized scikit-learn pipeline.
+- **Interactive CLI** for controlling the application.
+- **Preview mode** for testing predictions without modifying Gmail.
+- **Custom confidence threshold** configuration.
+- **Automatic Gmail label creation**.
+- **Local dataset caching** to avoid unnecessary downloads.
 
-- [Getting Started](getting-started.md)
-- [Configuration](configuration.md)
-- [Usage](usage.md)
-- [Releases](releases.md)
+---
+
+## How It Works
+
+The application processes an email through several stages:
+
+```text
+                    Gmail
+                      │
+                      ▼
+              Gmail Connector
+                      │
+                      ▼
+              Email Extraction
+                      │
+                      ▼
+             Text Preprocessing
+                      │
+                      ▼
+                  TF-IDF
+                      │
+                      ▼
+             Multinomial Naive Bayes
+                      │
+                      ▼
+             Category Prediction
+                      │
+                      ▼
+             Confidence Evaluation
+                      │
+              ┌───────┴───────┐
+              │               │
+           Accepted          Rejected
+              │               │
+              ▼               ▼
+        Gmail Label          Skip
+```
+
+The model combines the email subject and body before classification. The subject is intentionally given additional weight because it often contains strong signals about the purpose of an email.
+
+---
+
+## Technology Stack
+
+| Component            | Technology              |
+| -------------------- | ----------------------- |
+| Programming language | Python                  |
+| Machine learning     | scikit-learn            |
+| NLP                  | NLTK                    |
+| Feature extraction   | TF-IDF                  |
+| Classifier           | Multinomial Naive Bayes |
+| Email provider       | Gmail                   |
+| API                  | Gmail API               |
+| Authentication       | OAuth 2.0               |
+| Dataset              | Hugging Face Datasets   |
+| Documentation        | MkDocs                  |
+| Documentation theme  | Material for MkDocs     |
+| API documentation    | mkdocstrings            |
+
+---
+
+## Project Goals
+
+NLP-Mailer focuses on three main goals:
+
+### Automation
+
+Reduce the amount of manual work required to organize an inbox.
+
+### Simplicity
+
+Provide a lightweight application that can be executed locally without requiring a dedicated AI infrastructure.
+
+### Extensibility
+
+Keep Gmail integration, machine learning and application logic separated so that individual components can be extended independently.
+
+---
+
+## Documentation
+
+Use the following sections to learn more about NLP-Mailer:
+
+- [Getting Started](getting-started/installation.md) — install and configure the application.
+- [Guide](guide/commands.md) — learn how to use the CLI.
+- [Architecture](architecture/overview.md) — understand how the application is structured.
+- [API Reference](api/index.md) — explore the Python API.
+- [Development](development/local-development.md) — contribute to the project.
+- [Reference](reference/faq.md) — find answers to common questions and problems.
+
+---
+
+## License
+
+See the [Legal](reference/legal.md) section for information about project licensing, Gmail API usage and responsibilities related to automated email processing.

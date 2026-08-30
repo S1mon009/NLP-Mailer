@@ -7,10 +7,46 @@ edit_uri: edit/main/documentation/docs/
 
 nav:
   - Home: index.md
-  - Getting Started: getting-started.md
-  - Configuration: configuration.md
-  - Usage: usage.md
-  - Releases: releases.md
+
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Configuration: getting-started/configuration.md
+      - Gmail Setup: getting-started/gmail-setup.md
+      - First Run: getting-started/first-run.md
+
+  - Guide:
+      - Commands: guide/commands.md
+      - Email Categorization: guide/email-categorization.md
+      - Gmail Labels: guide/labels.md
+      - Confidence: guide/confidence.md
+      - Machine Learning: guide/machine-learning.md
+      - Model Management: guide/model-management.md
+
+  - Architecture:
+      - Overview: architecture/overview.md
+      - Project Structure: architecture/project-structure.md
+      - Application Flow: architecture/application-flow.md
+      - ML Pipeline: architecture/ml-pipeline.md
+
+  - API Reference:
+      - Overview: api/index.md
+      - CLI: api/cli.md
+      - Gmail Connector: api/gmail-connector.md
+      - Email Categorizer: api/email-categorizer.md
+      - Gmail Subject Tagger: api/gmail-subject-tagger.md
+      - Configuration: api/configuration.md
+
+  - Development:
+      - Local Development: development/local-development.md
+      - Testing: development/testing.md
+      - Documentation: development/documentation.md
+      - Contributing: development/contributing.md
+
+  - Reference:
+      - FAQ: reference/faq.md
+      - Troubleshooting: reference/troubleshooting.md
+      - Configuration Reference: reference/configuration-reference.md
+      - Legal: reference/legal.md
 
 theme:
   name: material
