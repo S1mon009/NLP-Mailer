@@ -28,7 +28,8 @@ class CLI:
     def __init__(self) -> None:
         """
         Initialize the command-line interface. 
-        Creates a new class `src.services.tagger.GmailSubjectTagger` instance that is used to perform all Gmail-related operations.
+        Creates a new class `src.services.tagger.GmailSubjectTagger` 
+        instance that is used to perform all Gmail-related operations.
         """
         self.tagger = GmailSubjectTagger()
 
