@@ -1,5 +1,24 @@
-from pathlib import Path
+"""
+Configuration and training data utilities for the Gmail Subject Auto-Tagger.
 
+This module contains the application's configuration constants, Gmail API
+settings, machine learning model settings, email categories, and Gmail
+label colors.
+
+It also provides utilities for loading the email classification dataset
+from Hugging Face, caching it locally, and converting the dataset into
+the training data format expected by the application's machine learning
+pipeline.
+
+The main configuration areas provided by this module are:
+
+- Gmail API credentials and authorization scopes.
+- Machine learning model path and minimum classification confidence.
+- Supported email categories and their corresponding Gmail label colors.
+- Hugging Face dataset configuration and local cache path.
+- Mapping between dataset labels and application categories.
+"""
+from pathlib import Path
 from datasets import load_dataset, load_from_disk
 
 # Gmail API Configuration
@@ -27,7 +46,6 @@ DATASET_LABELS = [
 
 CATEGORIES = DATASET_LABELS
 
-# Label Colors (for Gmail)
 LABEL_COLORS = {
     'Business': {'backgroundColor': '#4986e7', 'textColor': '#ffffff'},
     'Reminders': {'backgroundColor': '#16a765', 'textColor': '#ffffff'},
@@ -48,7 +66,19 @@ LABEL_MAPPING = {label: label for label in DATASET_LABELS}
 
 
 def load_hf_email_dataset():
-    '''Download the public email classification dataset and cache it locally.'''
+    """
+    Load the email classification dataset from Hugging Face.
+
+    If a locally cached version of the dataset exists, it is loaded
+    instead of downloading the dataset again. Otherwise, the dataset
+    is downloaded from Hugging Face, saved to the local cache directory,
+    and returned.
+
+    Returns:
+        Dataset:
+            The Hugging Face training dataset containing email
+            classification data.
+    """
     if DATASET_LOCAL_PATH.exists():
         print(f'Loading cached dataset from {DATASET_LOCAL_PATH}')
         return load_from_disk(str(DATASET_LOCAL_PATH))
@@ -61,7 +91,24 @@ def load_hf_email_dataset():
 
 
 def get_training_data():
-    '''Map HF dataset labels to the project's category set.'''
+    """
+    Prepare email data for machine learning model training.
+
+    Loads the configured Hugging Face dataset and converts each valid
+    record into the application's training data format.
+
+    Each record must contain a non-empty subject and body and at least
+    one label that matches a category defined in :data:`LABEL_MAPPING`.
+    Records that do not satisfy these requirements are skipped.
+
+    Returns:
+        list[dict]:
+            A list of dictionaries containing the following keys:
+
+            - **``subject``**: Email subject.
+            - **``body``**: Email body.
+            - **``category``**: Mapped application category.
+    """
     dataset = load_hf_email_dataset()
     training_data = []
 
@@ -90,6 +137,4 @@ def get_training_data():
 
     return training_data
 
-
-# Training Data
 TRAINING_DATA = get_training_data()

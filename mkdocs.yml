@@ -15,38 +15,54 @@ nav:
 theme:
   name: material
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+      media: "(prefers-color-scheme: light)"
+    - scheme: slate
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/brightness-4
-        name: Switch to system preference
+        icon: material/weather-sunny
+        name: Switch to light mode
+      media: "(prefers-color-scheme: dark)"
   features:
-    - navigation.tabs
-    - navigation.sections
+    - navigation.expand
+    - navigation.instant
     - navigation.top
-    - search.highlight
-    - content.code.copy
-    - content.action.view
+    - navigation.footer
+    - content.code.annotate
+    - content.tabs.link
+  language: en
 
 plugins:
   - search
-  - mike:
-      alias_type: symlink
-      canonical_version: latest
-      version_selector: true
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: false
+            show_root_toc_entry: true
+            show_root_heading: true
+            heading_level: 2
+            filters:
+              - "!^_"
+  - autorefs
 
 markdown_extensions:
   - admonition
-  - attr_list
-  - md_in_html
+  - codehilite
+  - toc:
+      permalink: true
+  - tables
+  - def_list
   - pymdownx.details
   - pymdownx.superfences
-  - tables
+  - pymdownx.highlight
 
 extra:
   version:
